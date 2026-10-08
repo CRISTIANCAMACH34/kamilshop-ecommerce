@@ -1,11 +1,31 @@
 {
-  "name": "kamilshop-monorepo",
-  "version": "1.0.0",
+  "name": "kamilshop-ecommerce",
   "private": true,
-  "workspaces": [
-    "frontend"
-  ],
+  "version": "1.0.0",
+  "type": "module",
   "scripts": {
-    "build": "cd frontend && npx vite build"
+    "build": "cd frontend && vite build",
+    "dev": "cd frontend && vite"
+  },
+  "dependencies": {
+    "@capacitor/app": "^6.0.0",
+    "@capacitor/core": "^6.0.0",
+    "@capacitor/haptics": "^6.0.0",
+    "@capacitor/status-bar": "^6.0.0",
+    "lottie-web": "^5.12.2",
+    "lucide-react": "^1.48.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "@capacitor/android": "^6.0.0",
+    "@capacitor/cli": "^6.0.0",
+    "@capacitor/ios": "^6.0.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.6.1",
+    "postcss": "^8.5.28",
+    "tailwindcss": "^3.4.19",
+    "vite": "^5.4.2"
   }
 }

@@ -1,9 +1,7 @@
 {
   "version": 2,
-  "installCommand": "npm install",
-  "buildCommand": "cd frontend && npx vite build",
+  "buildCommand": "cd frontend && vite build",
   "outputDirectory": "frontend/dist",
-  "framework": "vite",
   "rewrites": [
     {
       "source": "/api/v1/:path*",
