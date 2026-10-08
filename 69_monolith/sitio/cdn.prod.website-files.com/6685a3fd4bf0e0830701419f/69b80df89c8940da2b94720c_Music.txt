@@ -1,0 +1,44 @@
+if (window.matchMedia('(min-width: 768px)').matches) {
+  const source = "https://www.dropbox.com/scl/fo/ckotu7ixendzbf1lfihq1/AGn06d5LMBMsuBpSxo3sRcs/Videos/Ak%C4%B1n%20Sevg%C3%B6r%20-%2014%20Days.mp3?rlkey=i2y11jm0yz01gzkgx11umlzan&dl=1";
+  const audio = new Audio(source);
+  const toggleButton = document.getElementById("musicButton");
+
+  const updateButtonText = () => {
+    const onText = document.querySelector(".on");
+    const offText = document.querySelector(".off");
+
+    if (audio.paused) {
+      if (onText) onText.style.display = "none";
+      if (offText) offText.style.display = "inline";
+    } else {
+      if (offText) offText.style.display = "none";
+      if (onText) onText.style.display = "inline";
+    }
+  };
+
+  window.addEventListener("load", () => {
+    const savedTime = localStorage.getItem("audioTime");
+    if (savedTime) audio.currentTime = parseFloat(savedTime);
+
+    const savedPlayingState = localStorage.getItem("audioPlaying");
+    if (savedPlayingState === "true") audio.play();
+
+    updateButtonText();
+  });
+
+  if (toggleButton) {
+    toggleButton.addEventListener("click", () => {
+      if (audio.paused) {
+        audio.play();
+      } else {
+        audio.pause();
+      }
+      updateButtonText();
+    });
+  }
+
+  window.addEventListener("beforeunload", () => {
+    localStorage.setItem("audioTime", audio.currentTime);
+    localStorage.setItem("audioPlaying", String(!audio.paused));
+  });
+}

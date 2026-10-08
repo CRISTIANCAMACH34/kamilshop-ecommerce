@@ -1,0 +1,199 @@
+/**
+ * TITULO E-Commerce - Estilos para el Panel de Administración de Ropa
+ */
+
+.admin-modal-window {
+  max-width: 840px;
+  padding: 40px;
+}
+
+.admin-header-box {
+  margin-bottom: 28px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.admin-modal-badge {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  margin-bottom: 6px;
+}
+
+.admin-modal-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.admin-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.admin-form-grid .full-width {
+  grid-column: 1 / -1;
+}
+
+.admin-sizes-checkboxes {
+  display: flex;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.admin-size-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.admin-size-label input[type="checkbox"] {
+  accent-color: var(--text-primary);
+}
+
+/* Selector de presets de imagen */
+.admin-presets-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 8px;
+  margin-bottom: 12px;
+}
+
+.preset-img-pill {
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-secondary);
+  border-radius: 4px;
+  padding: 6px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transition: var(--transition-smooth);
+}
+
+.preset-img-pill img {
+  width: 100%;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+.preset-img-pill span {
+  font-size: 0.65rem;
+  text-align: center;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.preset-img-pill:hover {
+  border-color: var(--border-strong);
+}
+
+.preset-img-pill.active {
+  border-color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.preset-img-pill.active span {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.admin-img-preview-box {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.admin-preview-thumb {
+  width: 70px;
+  height: 85px;
+  border-radius: 4px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  object-fit: cover;
+}
+
+.admin-preview-hint {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.admin-actions-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.btn-admin-submit {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  padding: 12px 28px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  transition: var(--transition-smooth);
+}
+
+.btn-admin-submit:hover {
+  background: var(--accent-cream);
+  transform: translateY(-2px);
+}
+
+.btn-admin-reset {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.btn-admin-reset:hover {
+  color: var(--accent-red);
+}
+
+@media (max-width: 1024px) {
+  .admin-modal-window { padding: 28px; }
+  .admin-presets-container { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .admin-modal-window { padding: 20px; }
+  .admin-form-grid { grid-template-columns: 1fr; }
+  .admin-presets-container { grid-template-columns: repeat(2, 1fr); }
+  .admin-actions-bar { flex-direction: column-reverse; gap: 14px; align-items: stretch; }
+  .btn-admin-submit { text-align: center; }
+}
+
+@media (max-width: 480px) {
+  .admin-modal-window { padding: 14px; }
+  .admin-presets-container { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .admin-sizes-checkboxes { flex-wrap: wrap; gap: 8px; }
+  .admin-img-preview-box { flex-direction: column; align-items: flex-start; }
+  .admin-modal-title { font-size: 1.2rem; }
+  .btn-admin-submit { padding: 10px 20px; font-size: 0.8rem; }
+}

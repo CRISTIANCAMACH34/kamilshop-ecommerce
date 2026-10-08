@@ -1,0 +1,19 @@
+{
+  "short_name": "Kamil Shop",
+  "name": "Kamil Shop • Haute Couture & Apparel",
+  "description": "Tienda Online de Moda Contemporánea, Siluetas de Lujo y Pasarela Atelier. Bogotá, Colombia.",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "display": "standalone",
+  "orientation": "portrait",
+  "categories": ["shopping", "lifestyle", "fashion"]
+}

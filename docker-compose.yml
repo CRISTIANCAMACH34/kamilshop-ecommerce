@@ -1,0 +1,162 @@
+# ==============================================================================
+# Docker Compose Orquestador de Producción - E-COMERCE TIO Y CAMILA
+# Despliegue en Hostinger VPS (Postgres, Redis, FastAPI, Celery, Nginx)
+# ==============================================================================
+
+services:
+  # ----------------------------------------------------------------------------
+  # 1. BASE DE DATOS RELACIONAL (POSTGRESQL 16)
+  # ----------------------------------------------------------------------------
+  postgres:
+    image: postgres:16-alpine
+    container_name: camilaytio_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-camilaytio_ecommerce}
+      POSTGRES_USER: ${POSTGRES_USER:-camilaytio_admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-camilaytio_secure_db_pass_2026}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      # Inicializa automáticamente el esquema 5NF ACID en la primera ejecución
+      - ./database/schema_5nf_acid.sql:/docker-entrypoint-initdb.d/01_schema_5nf_acid.sql:ro
+    ports:
+      - "127.0.0.1:5432:5432"
+    networks:
+      - camilaytio_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-camilaytio_admin} -d ${POSTGRES_DB:-camilaytio_ecommerce}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ----------------------------------------------------------------------------
+  # 2. REDIS (CACHÉ & MESSAGE BROKER PARA CELERY)
+  # ----------------------------------------------------------------------------
+  redis:
+    image: redis:7-alpine
+    container_name: camilaytio_redis
+    restart: unless-stopped
+    command: >
+      sh -c 'if [ -n "${REDIS_PASSWORD}" ]; then
+               redis-server --requirepass "${REDIS_PASSWORD}" --appendonly yes;
+             else
+               redis-server --appendonly yes;
+             fi'
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-camilaytio_redis_secret_2026}
+    volumes:
+      - redis_data:/data
+    ports:
+      - "127.0.0.1:6379:6379"
+    networks:
+      - camilaytio_network
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli -a ${REDIS_PASSWORD:-camilaytio_redis_secret_2026} ping || redis-cli ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ----------------------------------------------------------------------------
+  # 3. BACKEND API (FASTAPI CON ARQUITECTURA HEXAGONAL)
+  # ----------------------------------------------------------------------------
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: camilaytio_backend
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql://camilaytio_admin:camilaytio_secure_db_pass_2026@postgres:5432/camilaytio_ecommerce}
+      REDIS_CACHE_URL: ${REDIS_CACHE_URL:-redis://:camilaytio_redis_secret_2026@redis:6379/2}
+      CELERY_BROKER_URL: ${CELERY_BROKER_URL:-redis://:camilaytio_redis_secret_2026@redis:6379/0}
+      CELERY_RESULT_BACKEND: ${CELERY_RESULT_BACKEND:-redis://:camilaytio_redis_secret_2026@redis:6379/1}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:8000:8000"
+    networks:
+      - camilaytio_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+
+  # ----------------------------------------------------------------------------
+  # 4. CELERY WORKER (TAREAS ASÍNCRONAS EN SEGUNDO PLANO)
+  # ----------------------------------------------------------------------------
+  celery_worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: camilaytio_celery_worker
+    restart: unless-stopped
+    command: ["celery", "-A", "app.infrastructure.celery_app.celery_app", "worker", "--loglevel=info", "--concurrency=2"]
+    env_file:
+      - .env
+    depends_on:
+      backend:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - camilaytio_network
+
+  # ----------------------------------------------------------------------------
+  # 5. CELERY BEAT (PLANIFICADOR PERIÓDICO DE TAREAS)
+  # ----------------------------------------------------------------------------
+  celery_beat:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: camilaytio_celery_beat
+    restart: unless-stopped
+    command: ["celery", "-A", "app.infrastructure.celery_app.celery_app", "beat", "--loglevel=info"]
+    env_file:
+      - .env
+    depends_on:
+      backend:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - camilaytio_network
+
+  # ----------------------------------------------------------------------------
+  # 6. FRONTEND SPA & PROXY REVERSO (NGINX)
+  # ----------------------------------------------------------------------------
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: camilaytio_frontend
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "80:80"
+    networks:
+      - camilaytio_network
+
+# ------------------------------------------------------------------------------
+# VOLÚMENES PERSISTENTES
+# ------------------------------------------------------------------------------
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+
+# ------------------------------------------------------------------------------
+# RED INTERNA AISLADA
+# ------------------------------------------------------------------------------
+networks:
+  camilaytio_network:
+    driver: bridge

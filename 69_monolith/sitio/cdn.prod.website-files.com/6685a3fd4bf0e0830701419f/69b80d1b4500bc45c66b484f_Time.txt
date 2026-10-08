@@ -1,0 +1,25 @@
+const formatAMPM = (date) => {
+  let hours = date.getHours();
+  const minutes = date.getMinutes();
+  const ampm = hours >= 12 ? "PM" : "AM";
+
+  hours = hours % 12 || 12;
+  const paddedMinutes = minutes.toString().padStart(2, "0");
+
+  return `${hours}:${paddedMinutes} ${ampm}, ET`;
+};
+
+const getNewYorkDate = () => {
+  const nyString = new Date().toLocaleString("en-US", { timeZone: "America/New_York" });
+  return new Date(nyString);
+};
+
+const updateTime = () => {
+  const currentTime = getNewYorkDate();
+  document.querySelectorAll(".time-txt").forEach((el) => {
+    el.innerText = formatAMPM(currentTime);
+  });
+};
+
+updateTime();
+setInterval(updateTime, 60000);

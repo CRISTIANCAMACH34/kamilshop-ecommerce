@@ -1,0 +1,12 @@
+paginas 100
+codigo 76 cola 3145
+assets intentados 15605
+codigo 76 cola 3145
+assets intentados 15605
+fotogramas de secuencia añadidos 0
+paginas 100
+codigo 76 cola 3145
+assets intentados 15597
+codigo 76 cola 3145
+assets intentados 15597
+fotogramas de secuencia añadidos 0

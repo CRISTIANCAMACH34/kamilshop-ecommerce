@@ -1,0 +1,34 @@
+{
+ "id": "33",
+ "nombre": "nfinite",
+ "url": "https://nfinitepaper.com",
+ "paginas": 2,
+ "archivos": 144,
+ "MB": 37.8,
+ "por_tipo": {
+  "jpg": 86,
+  "js": 23,
+  "png": 17,
+  "svg": 11,
+  "html": 3,
+  "css": 1,
+  "ico": 1,
+  "woff2": 1,
+  "webmanifest": 1
+ },
+ "modelos_3d": 0,
+ "videos": 0,
+ "svg_inline": 7,
+ "shaders": 5,
+ "texturas_glb": 0,
+ "tecnologias": [
+  "GSAP",
+  "Lenis",
+  "Next.js",
+  "React"
+ ],
+ "fallos": 29,
+ "minutos": 0.3,
+ "cortado_por_tiempo_o_disco": false,
+ "acceso": "ok"
+}

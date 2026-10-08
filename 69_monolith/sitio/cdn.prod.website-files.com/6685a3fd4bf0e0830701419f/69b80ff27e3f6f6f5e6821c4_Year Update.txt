@@ -1,0 +1,14 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const yearEl = document.querySelector("[data-year]");
+  if (!yearEl) return;
+
+  const currentYear = new Date().getFullYear();
+  const startYearAttr = yearEl.getAttribute("data-year");
+  const startYear = parseInt(startYearAttr || "", 10);
+
+  if (!isNaN(startYear) && startYear < currentYear) {
+    yearEl.textContent = `${startYear}–${currentYear}`;
+  } else {
+    yearEl.textContent = String(currentYear);
+  }
+});

@@ -1,0 +1,18 @@
+document.addEventListener('DOMContentLoaded', function () {
+  var header = document.querySelector('.header');
+  var heroSection = document.querySelector('[data-hero-blend="true"]');
+  if (!header || !heroSection) return;
+
+  function apply() {
+    if (window.innerWidth <= 768) {
+      header.style.mixBlendMode = '';
+      return;
+    }
+    var r = heroSection.getBoundingClientRect();
+    header.style.mixBlendMode = r.bottom > 0 ? 'normal' : 'difference';
+  }
+
+  window.addEventListener('scroll', apply, { passive: true });
+  window.addEventListener('resize', apply, { passive: true });
+  apply();
+});

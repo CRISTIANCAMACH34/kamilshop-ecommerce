@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TITULO • Contemporary Apparel & E-Commerce</title>
+  <meta name="description" content="TITULO — Estudio de moda contemporánea, siluetas de lujo y pasarela de empaque sustentable. Descubre nuestra colección exclusiva." />
+  
+  <!-- Estilos modulares unificados -->
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/hero-statue.css" />
+  <link rel="stylesheet" href="css/infinite-showcase.css" />
+  <link rel="stylesheet" href="css/apparel-catalog.css" />
+  <link rel="stylesheet" href="css/ecommerce-cart.css" />
+  <link rel="stylesheet" href="css/admin-panel.css" />
+</head>
+<body>
+
+  <!-- ==========================================================================
+       HEADER PRINCIPAL
+       ========================================================================== -->
+  <header class="site-header">
+    <div class="header-container">
+      
+      <!-- Izquierda: Logo TITULO, reloj y sonido -->
+      <div class="header-left">
+        <a href="#heroSection" class="brand-logo">TITULO</a>
+        
+        <div class="header-meta">
+          <div class="live-clock">
+            <span class="clock-dot"></span>
+            <span id="headerLiveTime">12:00 PM</span>
+            <span>• NYC</span>
+          </div>
+
+          <button type="button" class="sound-toggle-btn" id="headerMusicButton" title="Alternar sonido ambiental">
+            <div class="sound-waves">
+              <span class="sound-bar"></span>
+              <span class="sound-bar"></span>
+              <span class="sound-bar"></span>
+            </div>
+            <span>SOUND: <span class="sound-state-off">OFF</span><span class="sound-state-on" style="display:none;">ON</span></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Centro: Navegación -->
+      <nav class="header-center">
+        <a href="#pasarela" class="nav-link">Pasarela</a>
+        <a href="#catalogo" class="nav-link">Ropa / Colección</a>
+        <a href="#footer" class="nav-link">Acerca de</a>
+      </nav>
+
+      <!-- Derecha: Acciones E-Commerce & Administrador -->
+      <div class="header-right">
+        <button type="button" class="btn-admin-header" id="btnToggleAdminMode" title="Activar modo administrador para editar prendas">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 20h9"></path>
+            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+          </svg>
+          <span>ADMIN</span>
+        </button>
+
+        <button type="button" class="btn-cart-header trigger-cart-open" title="Ver carrito de compras">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span>CARRITO</span>
+          <span class="cart-count-badge">0</span>
+        </button>
+
+        <button type="button" class="hamburger-btn" id="mobileMenuBtn" aria-label="Abrir menú">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       MENÚ MÓVIL OVERLAY
+       ========================================================================== -->
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+    <div class="mobile-nav-links">
+      <a href="#heroSection" class="mobile-nav-link">Inicio</a>
+      <a href="#pasarela" class="mobile-nav-link">Pasarela Infinite</a>
+      <a href="#catalogo" class="mobile-nav-link">Catálogo de Ropa</a>
+      <a href="#footer" class="mobile-nav-link">Contacto</a>
+      <a href="#" class="mobile-nav-link trigger-cart-open">Tu Carrito (<span class="cart-count-badge">0</span>)</a>
+    </div>
+
+    <div class="mobile-menu-footer">
+      <div>TITULO STUDIO • CONTEMPORARY E-COMMERCE</div>
+      <div>77 WASHINGTON AVE, BROOKLYN, NYC</div>
+      <button type="button" class="btn-primary" id="btnCloseMobileMenu" style="margin-top: 10px; padding: 10px; background: var(--text-primary); color: var(--bg-primary); border-radius: 4px; font-weight: 700;">CERRAR MENÚ</button>
+    </div>
+  </div>
+
+  <main>
+    <!-- ==========================================================================
+         HERO SECTION: MONUMENTAL "TITULO" + ESCULTURA 3D
+         ========================================================================== -->
+    <section class="hero-section" id="heroSection">
+      <!-- Video de niebla de fondo -->
+      <video class="hero-video-bg" autoplay loop muted playsinline poster="assets/video/fog-poster.avif">
+        <source src="assets/video/fog.mp4" type="video/mp4" />
+      </video>
+
+      <div class="hero-overlay-top"></div>
+      <div class="hero-overlay-bottom"></div>
+
+      <!-- Tipografía Gigante de Fondo: TITULO -->
+      <div class="hero-giant-title-wrap">
+        <h1 class="hero-giant-title">TITULO</h1>
+      </div>
+
+      <!-- Escultura 3D Central con rotación en scroll -->
+      <div class="hero-statue-wrap">
+        <div id="statueContainer" class="statue-container" title="Busto escultórico contemporáneo"></div>
+      </div>
+
+      <!-- Textos perimetrales del Hero -->
+      <div class="hero-captions-container">
+        <div class="hero-caption-top">
+          <!-- Espacio reservado para aire superior -->
+        </div>
+
+        <div class="hero-caption-bottom">
+          <div class="hero-tagline">
+            TITULO // ESTUDIO DE MODA CONTEMPORÁNEA & E-COMMERCE. PIEZAS EXCLUSIVAS DE ALTA CONFECCIÓN.
+          </div>
+
+          <div class="hero-scroll-indicator">
+            <span>SCROLL PARA EXPLORAR</span>
+            <svg class="scroll-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <polyline points="19 12 12 19 5 12"></polyline>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PASARELA DE PRODUCTOS INFINITE
+         (Reemplaza la historia extensa de Monolith)
+         ========================================================================== -->
+    <section class="pasarela-section" id="pasarela">
+      <div class="pasarela-header">
+        <div class="pasarela-title-wrap">
+          <span class="pasarela-section-label">01 // INNOVACIÓN & PACKAGING</span>
+          <h2 class="pasarela-heading">Pasarela de Productos</h2>
+        </div>
+
+        <div class="pasarela-drag-hint">
+          <span>ARRASTRA PARA EXPLORAR</span>
+          <span>⟷</span>
+        </div>
+      </div>
+
+      <div class="pasarela-container" id="pasarelaContainer">
+        <div class="pasarela-track" id="pasarelaTrack">
+          <!-- Inyectado dinámicamente por infinite-slider.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         CATÁLOGO DE ROPA
+         (Reemplaza la sección de artistas por prendas administrables)
+         ========================================================================== -->
+    <section class="catalog-section" id="catalogo">
+      <div class="catalog-header">
+        <div class="catalog-title-group">
+          <h2 class="catalog-heading">Colección de Ropa</h2>
+          <span class="catalog-count-badge" id="catalogCountBadge">8 PRENDAS</span>
+        </div>
+
+        <div class="catalog-admin-btn-wrap">
+          <button type="button" class="btn-add-product-admin" id="btnTriggerAdminModal">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            <span>+ AGREGAR PRENDA</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Filtros por categoría y ordenamiento -->
+      <div class="catalog-controls-bar">
+        <div class="category-filters-list">
+          <button type="button" class="category-filter-btn active" data-category="todos">Todos</button>
+          <button type="button" class="category-filter-btn" data-category="hoodies">Hoodies</button>
+          <button type="button" class="category-filter-btn" data-category="camisetas">Camisetas</button>
+          <button type="button" class="category-filter-btn" data-category="chaquetas">Chaquetas</button>
+          <button type="button" class="category-filter-btn" data-category="pantalones">Pantalones</button>
+          <button type="button" class="category-filter-btn" data-category="accesorios">Accesorios</button>
+        </div>
+
+        <div class="catalog-sort-box">
+          <label for="catalogSortSelect">ORDENAR:</label>
+          <select id="catalogSortSelect" class="catalog-select">
+            <option value="destacados">Destacados</option>
+            <option value="precio-bajo">Precio: Menor a Mayor</option>
+            <option value="precio-alto">Precio: Mayor a Menor</option>
+            <option value="nombre">Nombre: A - Z</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Grid de Prendas de Ropa -->
+      <div class="apparel-grid" id="apparelGrid">
+        <!-- Inyectado dinámicamente por catalog-render.js -->
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       CARRITO SLIDE-OUT DRAWER
+       ========================================================================== -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Carrito de compras">
+    <div class="cart-header">
+      <div class="cart-title-wrap">
+        <h3 class="cart-title">Tu Carrito</h3>
+        <span class="cart-count-badge">0</span>
+      </div>
+      <button type="button" class="btn-close-cart" id="btnCartClose" aria-label="Cerrar carrito">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="cart-body">
+      <div class="cart-empty-state" id="cartEmptyState">
+        <svg class="cart-empty-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.5">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <path d="M16 10a4 4 0 0 1-8 0"></path>
+        </svg>
+        <p>Tu carrito está vacío.<br />Explora nuestra colección y añade prendas exclusivas.</p>
+        <a href="#catalogo" class="btn-primary" onclick="CartManager.closeDrawer()" style="margin-top: 12px; padding: 10px 20px; background: var(--text-primary); color: var(--bg-primary); border-radius: 4px; font-size: 0.8rem; font-weight: 700;">VER ROPA</a>
+      </div>
+
+      <div class="cart-items-list" id="cartItemsList">
+        <!-- Inyectado dinámicamente por cart-manager.js -->
+      </div>
+    </div>
+
+    <div class="cart-footer" id="cartFooter" style="display: none;">
+      <div class="cart-coupon-box">
+        <input type="text" class="cart-coupon-input" id="cartCouponInput" placeholder="CUPÓN (Ej: TITULO10)" />
+        <button type="button" class="btn-apply-coupon" id="btnApplyCoupon">APLICAR</button>
+      </div>
+
+      <div class="cart-totals-group">
+        <div class="cart-summary-row">
+          <span>Subtotal</span>
+          <span id="cartSubtotal">$0.00 USD</span>
+        </div>
+        <div class="cart-summary-row discount-row" id="cartDiscountRow" style="display: none;">
+          <span>Descuento aplicado</span>
+          <span id="cartDiscountAmount">-$0.00</span>
+        </div>
+        <div class="cart-summary-row">
+          <span>Envío Express</span>
+          <span style="color: #4ade80;">GRATIS</span>
+        </div>
+        <div class="cart-summary-row total-row">
+          <span>Total Estimado</span>
+          <span id="cartTotal">$0.00 USD</span>
+        </div>
+      </div>
+
+      <button type="button" class="btn-proceed-checkout" id="btnProceedCheckout">
+        PROCEDER AL PAGO
+      </button>
+    </div>
+  </aside>
+
+  <!-- ==========================================================================
+       MODAL DE VISTA RÁPIDA (QUICK VIEW)
+       ========================================================================== -->
+  <div class="modal-overlay" id="quickViewModal">
+    <div class="modal-window" style="max-width: 880px;">
+      <button type="button" class="btn-close-modal" id="btnCloseQuickView" aria-label="Cerrar vista rápida">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <div class="qv-grid">
+        <div class="qv-image-box">
+          <img id="qvImage" src="" alt="Prenda TITULO" />
+        </div>
+
+        <div class="qv-details">
+          <div class="qv-badge-row">
+            <span class="qv-badge" id="qvBadge">NUEVO DROP</span>
+            <span class="qv-category" id="qvCategory">HOODIES</span>
+          </div>
+
+          <h3 class="qv-title" id="qvTitle">TITULO Boxy Hoodie</h3>
+          <div class="qv-price" id="qvPrice">$95.00 USD</div>
+
+          <p class="qv-desc" id="qvDescription">Corte contemporáneo con hombros caídos y confección en algodón orgánico de alto gramaje.</p>
+
+          <div class="qv-specs-box" id="qvSpecs">
+            100% Algodón Francés • 480 GSM • Tratamiento artesanal
+          </div>
+
+          <div class="qv-sizes-row">
+            <span class="qv-sizes-label">Selecciona tu talla:</span>
+            <div class="qv-sizes-list" id="qvSizesList">
+              <!-- Botones de talla inyectados -->
+            </div>
+          </div>
+
+          <div class="qv-actions-box">
+            <input type="number" id="qvQuantity" class="qv-qty-input" value="1" min="1" max="10" />
+            <button type="button" class="btn-qv-add" id="btnQvAddToCart">AÑADIR AL CARRITO</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL DE CHECKOUT
+       ========================================================================== -->
+  <div class="modal-overlay" id="checkoutModal">
+    <div class="modal-window checkout-modal-window">
+      <button type="button" class="btn-close-modal" id="btnCloseCheckout" aria-label="Cerrar checkout">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <div style="font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent-gold); letter-spacing: 0.12em; text-transform: uppercase;">PASARELA DE PAGO SEGURA</div>
+      <h3 style="font-size: 1.6rem; font-weight: 700; text-transform: uppercase; margin-top: 4px;">Finalizar Pedido</h3>
+
+      <div class="checkout-summary-box" style="margin-top: 20px;">
+        <div id="checkoutSummaryList"></div>
+        <div class="checkout-total-row">
+          <span>Total a Pagar</span>
+          <span id="checkoutTotalFinal">$0.00 USD</span>
+        </div>
+      </div>
+
+      <form id="checkoutForm" class="checkout-form">
+        <div class="form-group">
+          <label class="form-label">Nombre Completo</label>
+          <input type="text" class="form-input" required placeholder="Ej: Camilo Gómez" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Correo Electrónico</label>
+          <input type="email" class="form-input" required placeholder="ejemplo@correo.com" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Dirección de Entrega</label>
+          <input type="text" class="form-input" required placeholder="Calle, Número, Ciudad y Código Postal" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Método de Pago</label>
+          <select class="form-select">
+            <option value="card">Tarjeta de Crédito / Débito (Visa, Mastercard, Amex)</option>
+            <option value="paypal">PayPal Express</option>
+            <option value="crypto">Cripto (USDT / BTC / ETH)</option>
+            <option value="delivery">Pago Contra Entrega</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn-proceed-checkout" style="margin-top: 10px;">
+          CONFIRMAR Y COMPLETAR COMPRA
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL DE CONFIRMACIÓN DE COMPRA
+       ========================================================================== -->
+  <div class="modal-overlay" id="orderSuccessModal">
+    <div class="modal-window order-success-window">
+      <div class="success-badge-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+
+      <h3 style="font-size: 1.5rem; font-weight: 700; text-transform: uppercase;">¡Compra Realizada con Éxito!</h3>
+      <p style="color: var(--text-secondary); font-size: 0.9rem; max-width: 380px;">
+        Hemos recibido tu pedido en el sistema de TITULO. En breve recibirás un correo con el tracking de tu envío.
+      </p>
+
+      <div class="order-reference-box">
+        ORDEN: <span id="successOrderNumber">TITULO-000000</span>
+      </div>
+
+      <button type="button" class="btn-proceed-checkout" id="btnCloseSuccess" style="margin-top: 12px; width: auto; padding: 12px 32px;">
+        CONTINUAR COMPRANDO
+      </button>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       PANEL DE ADMINISTRACIÓN (MODAL PARA GESTIONAR ROPA)
+       ========================================================================== -->
+  <div class="modal-overlay" id="adminModal">
+    <div class="modal-window admin-modal-window">
+      <button type="button" class="btn-close-modal" id="btnCloseAdminModal" aria-label="Cerrar modal de admin">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <div class="admin-header-box">
+        <div class="admin-modal-badge">PANEL DE CONTROL // ADMINISTRADOR</div>
+        <h3 class="admin-modal-title" id="adminModalTitle">AGREGAR NUEVA PRENDA AL CATÁLOGO</h3>
+      </div>
+
+      <form id="adminProductForm">
+        <div class="admin-form-grid">
+          <div class="form-group full-width">
+            <label class="form-label">Nombre de la Prenda</label>
+            <input type="text" id="adminProductName" class="form-input" required placeholder="Ej: TITULO Heavyweight Oversized Tee" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Categoría</label>
+            <select id="adminProductCategory" class="form-select">
+              <option value="camisetas">Camisetas</option>
+              <option value="hoodies">Hoodies / Sudaderas</option>
+              <option value="chaquetas">Chaquetas / Abrigos</option>
+              <option value="pantalones">Pantalones / Cargos</option>
+              <option value="accesorios">Accesorios</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Precio ($ USD)</label>
+            <input type="number" id="adminProductPrice" class="form-input" required step="0.01" min="0" placeholder="Ej: 75.00" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Etiqueta / Badge</label>
+            <input type="text" id="adminProductBadge" class="form-input" placeholder="Ej: NUEVO DROP, EDICIÓN LIMITADA" value="NUEVO" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Estilo del Badge</label>
+            <select id="adminProductBadgeType" class="form-select">
+              <option value="new">Verde (Nuevo)</option>
+              <option value="limited">Dorado (Edición Limitada)</option>
+              <option value="hot">Rojo (Best Seller / Caliente)</option>
+              <option value="exclusive">Púrpura (Exclusivo)</option>
+            </select>
+          </div>
+
+          <div class="form-group full-width">
+            <label class="form-label">Tallas Disponibles</label>
+            <div class="admin-sizes-checkboxes">
+              <label class="admin-size-label"><input type="checkbox" name="adminSizes" value="S" checked /> S</label>
+              <label class="admin-size-label"><input type="checkbox" name="adminSizes" value="M" checked /> M</label>
+              <label class="admin-size-label"><input type="checkbox" name="adminSizes" value="L" checked /> L</label>
+              <label class="admin-size-label"><input type="checkbox" name="adminSizes" value="XL" checked /> XL</label>
+              <label class="admin-size-label"><input type="checkbox" name="adminSizes" value="XXL" /> XXL</label>
+            </div>
+          </div>
+
+          <div class="form-group full-width">
+            <label class="form-label">Especificaciones Técnicas (Material / Gramaje)</label>
+            <input type="text" id="adminProductSpecs" class="form-input" placeholder="Ej: 100% Algodón Peinado • 450 GSM • Cuello Reforzado" />
+          </div>
+
+          <div class="form-group full-width">
+            <label class="form-label">Descripción Detallada</label>
+            <textarea id="adminProductDesc" class="form-input" rows="3" placeholder="Describe los detalles de confección, corte y estilo de la prenda..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Stock en Inventario</label>
+            <input type="number" id="adminProductStock" class="form-input" value="15" min="0" />
+          </div>
+
+          <div class="form-group full-width">
+            <label class="form-label">Seleccionar Imagen (Galería de Presets Prémium o URL personalizada)</label>
+            <div class="admin-presets-container" id="adminImagePresets">
+              <!-- Inyectado por admin-controller.js -->
+            </div>
+            
+            <input type="text" id="adminProductImage" class="form-input" placeholder="O ingresa la URL de una imagen externa..." value="assets/products/apparel-hoodie-cream.jpg" />
+
+            <div class="admin-img-preview-box">
+              <img id="adminImagePreview" class="admin-preview-thumb" src="assets/products/apparel-hoodie-cream.jpg" alt="Vista previa" />
+              <span class="admin-preview-hint">Esta imagen se mostrará en las tarjetas y vista rápida.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="admin-actions-bar">
+          <button type="button" class="btn-admin-reset" id="btnResetCatalog">Restaurar catálogo inicial de fábrica</button>
+          <button type="submit" class="btn-admin-submit" id="adminSubmitBtn">PUBLICAR PRENDA EN LA TIENDA</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       FOOTER BRUTALISTA // TITULO
+       ========================================================================== -->
+  <footer class="site-footer" id="footer">
+    <div class="footer-container">
+      <div class="footer-brand-col">
+        <a href="#heroSection" class="footer-logo">TITULO</a>
+        <p class="footer-manifesto">
+          Diseño contemporáneo que fusiona la arquitectura brutalista y la alta costura con empaque sustentable de vanguardia.
+        </p>
+
+        <form id="newsletterForm" class="newsletter-form">
+          <input type="email" required placeholder="Tu correo electrónico" class="newsletter-input" />
+          <button type="submit" class="newsletter-btn">SUSCRIBIRSE</button>
+        </form>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-col-title">Colección</div>
+        <ul class="footer-links-list">
+          <li><a href="#catalogo">Hoodies & Sudaderas</a></li>
+          <li><a href="#catalogo">Camisetas Heavyweight</a></li>
+          <li><a href="#catalogo">Chaquetas Técnicas</a></li>
+          <li><a href="#catalogo">Pantalones Cargo</a></li>
+          <li><a href="#catalogo">Accesorios & Gorras</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-col-title">Innovación</div>
+        <ul class="footer-links-list">
+          <li><a href="#pasarela">Pasarela Infinite</a></li>
+          <li><a href="#pasarela">Packaging Sostenible</a></li>
+          <li><a href="#pasarela">Barrera al Oxígeno</a></li>
+          <li><a href="#pasarela">Reciclabilidad 100%</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <div class="footer-col-title">Estudio & Soporte</div>
+        <ul class="footer-links-list">
+          <li><a href="#">Guía de Tallas</a></li>
+          <li><a href="#">Política de Envíos</a></li>
+          <li><a href="#">Devoluciones</a></li>
+          <li><a href="#">Términos del Servicio</a></li>
+          <li><a href="mailto:hola@titulo-studio.com">hola@titulo-studio.com</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>© <span id="footerCurrentYear">2026</span> TITULO • TODOS LOS DERECHOS RESERVADOS</div>
+      <button type="button" class="btn-back-to-top" id="btnBackToTop">VOLVER ARRIBA ↑</button>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       SCRIPTS (Lottie, Lenis, Data Store & Controladores)
+       ========================================================================== -->
+  <script src="js/vendor/lenis.js"></script>
+  <script src="js/vendor/lottie.min.js"></script>
+  <script src="js/products-data.js"></script>
+  <script src="js/cart-manager.js"></script>
+  <script src="js/catalog-render.js"></script>
+  <script src="js/infinite-slider.js"></script>
+  <script src="js/statue-controller.js"></script>
+  <script src="js/audio-controller.js"></script>
+  <script src="js/admin-controller.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>

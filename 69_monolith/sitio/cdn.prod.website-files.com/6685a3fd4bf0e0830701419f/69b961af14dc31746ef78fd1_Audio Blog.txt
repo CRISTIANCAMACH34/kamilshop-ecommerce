@@ -1,0 +1,91 @@
+document.addEventListener('DOMContentLoaded', function () {
+  var textDiv = document.querySelector('[ms-code-text-to-speech="text"]');
+  var speakButton = document.querySelector('[ms-code-text-to-speech="button"]');
+  var progressBar = document.getElementById('progress-bar');
+  if (!textDiv || !speakButton || !progressBar) return;
+
+  var paragraphs = Array.from(textDiv.querySelectorAll('p, h2, h3, h4, .b-txt'));
+  if (!paragraphs.length) return;
+
+  var interval = null;
+  var utterance = null;
+  var textArray = '';
+  var ranges = [];
+  var startTime = 0;
+
+  function clearHighlight() {
+    paragraphs.forEach(function (p) { p.classList.remove('highlight'); });
+  }
+
+  function highlightIndex(i) {
+    if (i < 0 || i >= paragraphs.length) return;
+    clearHighlight();
+    var el = paragraphs[i];
+    el.classList.add('highlight');
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function stop() {
+    try { window.speechSynthesis.cancel(); } catch (e) {}
+    if (interval) { clearInterval(interval); interval = null; }
+    progressBar.style.width = '0%';
+    clearHighlight();
+    utterance = null;
+  }
+
+  function buildTextAndRanges() {
+    textArray = '';
+    ranges = [];
+    var pos = 0;
+
+    paragraphs.forEach(function (p) {
+      var t = (p.textContent || '').trim();
+      var start = pos;
+      textArray += (textArray ? ' ' : '') + t;
+      pos = textArray.length;
+      ranges.push({ start: start, end: pos });
+    });
+  }
+
+  function indexFromChar(charIndex) {
+    for (var i = 0; i < ranges.length; i++) {
+      if (charIndex >= ranges[i].start && charIndex < ranges[i].end) return i;
+    }
+    return 0;
+  }
+
+  speakButton.addEventListener('click', function () {
+    if (window.speechSynthesis.speaking || window.speechSynthesis.paused) {
+      stop();
+      return;
+    }
+
+    buildTextAndRanges();
+    if (!textArray) return;
+
+    utterance = new SpeechSynthesisUtterance(textArray);
+    startTime = Date.now();
+
+    utterance.onboundary = function (e) {
+      if (typeof e.charIndex === 'number') {
+        highlightIndex(indexFromChar(e.charIndex));
+      }
+    };
+
+    utterance.onend = function () { stop(); };
+    utterance.onerror = function () { stop(); };
+
+    interval = setInterval(function () {
+      if (!utterance) return;
+      var elapsed = Date.now() - startTime;
+      var approx = Math.min(elapsed / Math.max(1, textArray.length * 30), 1);
+      progressBar.style.width = (approx * 100) + '%';
+    }, 100);
+
+    window.speechSynthesis.speak(utterance);
+    highlightIndex(0);
+  });
+
+  window.addEventListener('beforeunload', stop);
+  window.addEventListener('pagehide', stop);
+});

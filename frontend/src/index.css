@@ -1,0 +1,91 @@
+@import '../css/main.css';
+@import '../css/hero-statue.css';
+@import '../css/infinite-showcase.css';
+@import '../css/apparel-catalog.css';
+@import '../css/ecommerce-cart.css';
+@import '../css/admin-panel.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.modal-overlay,
+.modal-window,
+.cart-drawer,
+aside,
+[role="dialog"] {
+  overscroll-behavior: contain;
+}
+
+/* ==========================================================================
+   TIPOGRAFÍA Y ESCALADO FLUIDO GLOBAL 100% RESPONSIVE
+   Adaptación de tamaño de fuentes según resolución (320px -> 480px -> 768px -> 1024px -> 1440px+)
+   ========================================================================== */
+
+/* Prevenir desbordes de texto y palabras largas en pantallas estrechas */
+h1, h2, h3, h4, h5, h6, p, span, a, button, label, input, textarea, td, th {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+/* En móviles ultra-compactos (< 380px), escalar proporcionalmente la raíz para que nada se corte */
+@media (max-width: 380px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 381px) and (max-width: 640px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1440px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1441px) {
+  html {
+    font-size: 16.5px;
+  }
+}
+
+/* Tipografía fluida para títulos principales de secciones tanto en cliente como en admin */
+.text-responsive-title {
+  font-size: clamp(1.25rem, 3.5vw, 2.25rem);
+  line-height: 1.2;
+}
+
+.text-responsive-subtitle {
+  font-size: clamp(0.75rem, 1.8vw, 0.95rem);
+  line-height: 1.4;
+}
+
+.text-responsive-stat {
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  line-height: 1.1;
+}
+
+.text-responsive-badge {
+  font-size: clamp(0.6rem, 1.2vw, 0.75rem);
+  letter-spacing: 0.08em;
+}
+
+/* Scrollbars responsivos amigables con toque móvil */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.3);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.5);
+}

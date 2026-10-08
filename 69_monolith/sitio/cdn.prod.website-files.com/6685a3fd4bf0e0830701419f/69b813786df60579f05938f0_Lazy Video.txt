@@ -1,0 +1,24 @@
+(() => {
+  const videos = document.querySelectorAll("video");
+  if (!videos.length) return;
+
+  videos.forEach((video) => {
+    video.disablePictureInPicture = true;
+  });
+
+  const style = document.createElement("style");
+  style.textContent = `
+    :root {
+      --plyr-color-main: var(--colors--player-color);
+    }
+    .plyr {
+      border-radius: 8px !important;
+    }
+  `;
+  document.head.appendChild(style);
+
+  const script = document.createElement("script");
+  script.src = "https://cdn.jsdelivr.net/npm/lazy-load-video@latest/dist/custom-video.js";
+  script.async = true;
+  document.head.appendChild(script);
+})();

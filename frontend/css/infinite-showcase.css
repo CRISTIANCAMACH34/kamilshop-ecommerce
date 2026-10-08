@@ -1,0 +1,264 @@
+/**
+ * TITULO E-Commerce - Pasarela de Productos Estilo Infinite
+ * Reemplaza la historia extensa de Monolith por el carrusel marquee continuo y arrastrable.
+ */
+
+.pasarela-section {
+  position: relative;
+  width: 100%;
+  padding: 100px 0 120px;
+  background-color: var(--bg-primary);
+  overflow: hidden;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.pasarela-header {
+  max-width: 1680px;
+  margin: 0 auto 48px;
+  padding: 0 36px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.pasarela-title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pasarela-section-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.pasarela-heading {
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  color: var(--text-primary);
+}
+
+.pasarela-drag-hint {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Contenedor del Carrusel Marquee */
+.pasarela-container {
+  width: 100%;
+  overflow: hidden;
+  cursor: grab;
+  user-select: none;
+  padding: 20px 0 40px;
+}
+
+.pasarela-container.dragging {
+  cursor: grabbing;
+}
+
+@keyframes pasarela-marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.pasarela-track {
+  display: flex;
+  gap: 28px;
+  width: max-content;
+  will-change: transform;
+  padding-left: 36px;
+  animation: pasarela-marquee 45s linear infinite;
+}
+
+.pasarela-track.is-paused,
+.pasarela-container:hover .pasarela-track {
+  animation-play-state: paused;
+}
+
+/* Tarjetas individuales de la Pasarela */
+.pasarela-card {
+  width: 320px;
+  flex-shrink: 0;
+  background: #f3efe6; /* Tono crema característico de Infinite */
+  color: #111111;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.pasarela-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+.pasarela-card-inner {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.pasarela-badge {
+  align-self: flex-start;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: #111111;
+  color: #f3efe6;
+  padding: 4px 8px;
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+
+.pasarela-img-box {
+  width: 100%;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.pasarela-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pasarela-card:hover .pasarela-img {
+  transform: scale(1.08);
+}
+
+.pasarela-card-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.pasarela-category {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: #666666;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.pasarela-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #111111;
+  line-height: 1.25;
+}
+
+.pasarela-desc {
+  font-size: 0.8rem;
+  color: #444444;
+  line-height: 1.45;
+  margin-top: 4px;
+}
+
+.pasarela-price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.pasarela-price {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #111111;
+}
+
+.btn-pasarela-add {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: #111111;
+  color: #f3efe6;
+  padding: 8px 14px;
+  border-radius: 4px;
+  transition: var(--transition-smooth);
+}
+
+.btn-pasarela-add:hover {
+  background: #333333;
+}
+
+@media (max-width: 768px) {
+  .pasarela-section {
+    padding: 48px 0 64px;
+  }
+  .pasarela-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 0 16px;
+  }
+  .pasarela-track {
+    padding-left: 16px;
+    gap: 14px;
+  }
+  .pasarela-card {
+    width: 260px;
+  }
+  .pasarela-img-box {
+    height: 220px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pasarela-section {
+    padding: 36px 0 48px;
+  }
+  .pasarela-card {
+    width: 230px;
+  }
+  .pasarela-card-inner {
+    padding: 16px;
+  }
+  .pasarela-img-box {
+    height: 190px;
+    margin-bottom: 16px;
+  }
+  .pasarela-title {
+    font-size: 1rem;
+  }
+  .pasarela-heading {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+  }
+}
+
+@media (max-width: 360px) {
+  .pasarela-card {
+    width: 200px;
+  }
+  .pasarela-img-box {
+    height: 160px;
+  }
+}

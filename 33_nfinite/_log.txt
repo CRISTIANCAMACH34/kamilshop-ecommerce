@@ -1,0 +1,12 @@
+paginas 2
+codigo 24 cola 85
+assets intentados 240
+codigo 24 cola 85
+assets intentados 240
+fotogramas de secuencia añadidos 0
+paginas 2
+codigo 24 cola 86
+assets intentados 240
+codigo 24 cola 86
+assets intentados 240
+fotogramas de secuencia añadidos 0

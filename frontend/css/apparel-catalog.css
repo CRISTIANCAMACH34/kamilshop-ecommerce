@@ -1,0 +1,738 @@
+/**
+ * TITULO E-Commerce - Catálogo de Ropa
+ * 100% Responsive: 320px → 480px → 768px → 1024px → 1400px+
+ */
+
+.catalog-section {
+  position: relative;
+  width: 100%;
+  padding: 80px 24px 120px;
+  max-width: 1680px;
+  margin: 0 auto;
+}
+
+/* Header de la sección de Catálogo */
+.catalog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 32px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-subtle);
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.catalog-title-group {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.catalog-heading {
+  font-size: clamp(1.8rem, 4vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.catalog-count-badge {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  background: var(--bg-card);
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--border-subtle);
+  white-space: nowrap;
+}
+
+.catalog-admin-btn-wrap {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.btn-add-product-admin {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  padding: 10px 20px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: var(--transition-smooth);
+  white-space: nowrap;
+}
+
+.btn-add-product-admin:hover {
+  background: var(--accent-cream);
+  transform: translateY(-2px);
+}
+
+/* Barra de Filtros y Ordenamiento */
+.catalog-controls-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.category-filters-list {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 8px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+  max-width: 100%;
+}
+
+.category-filters-list::-webkit-scrollbar {
+  display: none;
+}
+
+.category-filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  font-family: var(--font-mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  border-radius: 6px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+  flex-shrink: 0;
+  cursor: pointer;
+  user-select: none;
+}
+
+.category-filter-btn:hover {
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.category-filter-btn.active {
+  background: #ffffff;
+  color: #0a0a0a;
+  border-color: #ffffff;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(255, 255, 255, 0.12);
+}
+
+.category-count-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+}
+
+.category-filter-btn:hover .category-count-chip {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.category-filter-btn.active .category-count-chip {
+  background: rgba(0, 0, 0, 0.15);
+  color: #000000;
+}
+
+.quick-tag-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-family: var(--font-mono);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.quick-tag-chip:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.quick-tag-chip.active {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.catalog-sort-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.catalog-select {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  outline: none;
+  cursor: pointer;
+}
+
+.catalog-select:focus {
+  border-color: var(--text-primary);
+}
+
+/* Grid del Catálogo de Ropa */
+.apparel-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px 20px;
+}
+
+.apparel-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition-smooth);
+  position: relative;
+}
+
+.apparel-card:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* Media / Imagen de la prenda */
+.card-media-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  background: #181818;
+  overflow: hidden;
+}
+
+.card-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 3px;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(8px);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+}
+
+.card-badge.badge-new { border-color: #4ade80; color: #4ade80; }
+.card-badge.badge-limited { border-color: #94a3b8; color: #f8fafc; background: rgba(255,255,255,0.1); }
+.card-badge.badge-hot { border-color: var(--accent-red); color: var(--accent-red); }
+.card-badge.badge-exclusive { border-color: #c084fc; color: #c084fc; }
+
+.card-image-box {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  position: relative;
+}
+
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
+}
+
+.apparel-card:hover .card-img {
+  transform: scale(1.06);
+}
+
+.card-hover-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.apparel-card:hover .card-hover-overlay {
+  opacity: 1;
+}
+
+.btn-quick-look {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 8px 16px;
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  border-radius: 20px;
+  transform: translateY(10px);
+  transition: transform 0.3s ease;
+}
+
+.apparel-card:hover .btn-quick-look {
+  transform: translateY(0);
+}
+
+/* Acciones flotantes de administración en la tarjeta */
+.admin-card-actions {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 10;
+  display: flex;
+  gap: 6px;
+}
+
+.btn-admin-card {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(10, 10, 10, 0.85);
+  color: var(--text-primary);
+  border: 1px solid var(--border-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-smooth);
+}
+
+.btn-admin-card:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+.btn-admin-card.btn-delete:hover {
+  background: var(--accent-red);
+  color: #fff;
+  border-color: var(--accent-red);
+}
+
+/* Contenido de la tarjeta */
+.card-content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.card-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  margin-bottom: 6px;
+}
+
+.card-category-label {
+  font-family: var(--font-mono);
+  font-size: clamp(0.65rem, 1.8vw, 0.72rem);
+  letter-spacing: 0.08em;
+  color: #a3a3a3;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.card-price {
+  font-family: var(--font-main);
+  font-size: clamp(0.92rem, 2.4vw, 1.05rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 6px;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.card-title:hover {
+  color: var(--accent-cream);
+}
+
+.card-specs {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  margin-bottom: 14px;
+}
+
+/* Selector de Tallas en la tarjeta */
+.card-size-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  margin-top: auto;
+  flex-wrap: wrap;
+}
+
+.size-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #a3a3a3;
+}
+
+.sizes-pills {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.size-pill {
+  min-width: 32px;
+  height: 32px;
+  padding: 0 6px;
+  border-radius: 6px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-card);
+  color: #f1f5f9;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-smooth);
+}
+
+.size-pill:hover {
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+  transform: translateY(-1px);
+}
+
+.size-pill.selected {
+  background: #ffffff;
+  color: #000000;
+  border-color: #ffffff;
+  font-weight: 800;
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.2);
+}
+
+/* Botones de acción */
+.card-actions-row {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-add-to-cart {
+  flex: 1;
+  background: var(--bg-card);
+  border: 1px solid var(--border-strong);
+  color: var(--text-primary);
+  padding: 10px 12px;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: var(--transition-smooth);
+}
+
+.btn-add-to-cart:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  border-color: var(--text-primary);
+}
+
+.btn-add-to-cart.added {
+  background: #22c55e;
+  color: #fff;
+  border-color: #22c55e;
+}
+
+.btn-view-details {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-smooth);
+  flex-shrink: 0;
+}
+
+.btn-view-details:hover {
+  background: var(--border-strong);
+}
+
+.btn-view-details .icon-arrow {
+  width: 14px;
+  height: 14px;
+  filter: invert(1);
+}
+
+.catalog-empty {
+  grid-column: 1 / -1;
+  padding: 60px 20px;
+  text-align: center;
+  color: var(--text-secondary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+/* ==========================================================================
+   ESTILOS DE FILTRADO POR MARCA, PRECIO Y STOCK
+   ========================================================================== */
+
+.brand-filters-wrap {
+  width: 100%;
+  margin-bottom: 14px;
+}
+
+.brand-filters-list {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+  max-width: 100%;
+}
+
+.brand-filters-list::-webkit-scrollbar {
+  display: none;
+}
+
+.brand-filter-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 9999px;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+}
+
+.brand-filter-pill:hover {
+  background: var(--border-subtle);
+  border-color: var(--border-strong);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+}
+
+.brand-filter-pill.active {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #000000;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(255, 255, 255, 0.15);
+}
+
+.brand-pill-name {
+  text-transform: uppercase;
+}
+
+.brand-count-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1px 6px;
+  font-size: 0.65rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  color: inherit;
+}
+
+.brand-filter-pill.active .brand-count-chip {
+  background: rgba(0, 0, 0, 0.14);
+  color: #000000;
+  font-weight: 800;
+}
+
+/* Toggle de Disponibilidad / Stock */
+.stock-filter-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.stock-filter-toggle:hover {
+  background: var(--border-subtle);
+  border-color: var(--border-strong);
+  color: var(--text-primary);
+}
+
+.stock-filter-toggle.active {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #ffffff;
+  color: #ffffff;
+}
+
+.stock-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transition: all 0.2s ease;
+}
+
+.stock-status-dot.active {
+  background: #22c55e;
+  box-shadow: 0 0 8px #22c55e;
+}
+
+/* Fila de Marca y Stock en Tarjeta */
+.card-brand-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 4px;
+  margin-bottom: 2px;
+}
+
+.card-brand-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card-stock-warning {
+  font-family: var(--font-mono);
+  font-size: 0.60rem;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1px 6px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 1400px) {
+  .apparel-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 1024px) {
+  .catalog-section { padding: 60px 20px 100px; }
+  .apparel-grid { grid-template-columns: repeat(3, 1fr); gap: 20px 16px; }
+}
+
+@media (max-width: 768px) {
+  .catalog-section { padding: 50px 16px 80px; }
+  .apparel-grid { grid-template-columns: repeat(2, 1fr); gap: 16px 12px; }
+  .catalog-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .catalog-controls-bar { flex-direction: column; align-items: stretch; gap: 12px; }
+  .catalog-sort-box { width: 100%; justify-content: flex-end; }
+  .catalog-select { flex: 1; }
+  .stock-filter-toggle { width: 100%; justify-content: center; }
+}
+
+@media (max-width: 480px) {
+  .catalog-section { padding: 40px 12px 60px; }
+  .apparel-grid { grid-template-columns: repeat(2, 1fr); gap: 12px 10px; }
+  .card-content { padding: 10px; }
+  .card-title { font-size: 0.85rem; line-height: 1.25; }
+  .card-price { font-size: 0.88rem; }
+  .btn-add-to-cart { font-size: 0.62rem; padding: 7px 6px; letter-spacing: 0.02em; min-width: 0; }
+  .btn-add-to-cart .btn-text { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 80px; }
+  .card-specs { display: none; }
+  .size-pill { min-width: 30px; height: 30px; font-size: 0.72rem; border-radius: 5px; }
+  .brand-filter-pill { padding: 6px 10px; font-size: 0.70rem; }
+  .card-brand-label { font-size: 0.62rem; }
+  .card-stock-warning { font-size: 0.58rem; padding: 1px 4px; }
+}
+
+@media (max-width: 360px) {
+  .apparel-grid { grid-template-columns: 1fr; }
+  .card-content { padding: 12px; }
+  .btn-add-to-cart .btn-text { max-width: none; }
+}

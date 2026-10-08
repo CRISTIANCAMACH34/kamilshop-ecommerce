@@ -1,0 +1,18 @@
+(function () {
+  if (!window.matchMedia("(max-width: 767px)").matches) return;
+  var desktopWrap = document.querySelector(".monolith_scrollable.desktop");
+  if (desktopWrap) desktopWrap.hidden = true;
+  var lottie = document.querySelector(".monolith_scrollable.desktop .monolith_m[data-animation-type='lottie']");
+  if (lottie) {
+    lottie.removeAttribute("data-animation-type");
+    lottie.removeAttribute("data-src");
+    lottie.innerHTML = "";
+    lottie.hidden = true;
+  }
+  var desktopVideos = document.querySelectorAll(".monolith_scrollable.desktop video[src]");
+  desktopVideos.forEach(function (v) {
+    v.removeAttribute("src");
+    v.removeAttribute("autoplay");
+    v.load && v.load();
+  });
+})();

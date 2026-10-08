@@ -1,0 +1,10 @@
+const topButton = document.getElementById("to-top");
+
+if (topButton) {
+  topButton.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+}
