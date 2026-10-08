@@ -1,14 +1,25 @@
 import sys
+import os
 from pathlib import Path
 
-# Agregar el directorio backend al PYTHONPATH para la resolución de módulos de Python en Vercel
-root_dir = Path(__file__).resolve().parent.parent
-backend_dir = root_dir / "backend"
+# Resolver directorios en entornos locales y empaquetados Serverless de Vercel
+current_dir = Path(__file__).resolve().parent
+root_dir = current_dir.parent
 
-if str(backend_dir) not in sys.path:
-    sys.path.insert(0, str(backend_dir))
+search_paths = [
+    str(current_dir),
+    str(root_dir / "backend"),
+    str(current_dir / "backend"),
+    str(Path(os.getcwd()) / "backend"),
+    "/var/task/backend",
+    "/var/task",
+]
 
+for p in search_paths:
+    if p not in sys.path and os.path.exists(p):
+        sys.path.insert(0, p)
+
+# Importar app FastAPI
 from app.main import app  # noqa: E402
 
-# Exportación requerida por el runtime Python Serverless de Vercel
 __all__ = ["app"]
