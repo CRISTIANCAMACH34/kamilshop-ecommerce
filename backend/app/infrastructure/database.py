@@ -25,8 +25,12 @@ from app.config import settings
 
 Base = declarative_base()
 
-# Directorio de datos locales para SQLite
-DB_PATH = Path(__file__).resolve().parent.parent.parent / "kamilshop.db"
+# Directorio de datos locales para SQLite (soporte de entorno de solo lectura en Vercel/Lambda)
+is_serverless = bool(os.getenv("VERCEL") or os.getenv("AWS_LAMBDA_FUNCTION_NAME"))
+if is_serverless:
+    DB_PATH = Path("/tmp/kamilshop.db")
+else:
+    DB_PATH = Path(__file__).resolve().parent.parent.parent / "kamilshop.db"
 SQLITE_URL = f"sqlite:///{DB_PATH}"
 
 # Normalizar URL de base de datos (Supabase a menudo utiliza el prefijo postgres://)
@@ -373,27 +377,29 @@ class ProductVariantModel(Base):
 
 def init_db():
     """Crea todas las tablas e índices en la base de datos de manera idempotente."""
-    Base.metadata.create_all(bind=engine)
+    try:
+        Base.metadata.create_all(bind=engine)
 
-    # Asegurar creación explícita de índices sobre tablas preexistentes
-    raw_indexes = [
-        "CREATE INDEX IF NOT EXISTS idx_orders_created_at ON orders(created_at);",
-        "CREATE INDEX IF NOT EXISTS idx_orders_customer_created ON orders(customer_email, created_at);",
-        "CREATE INDEX IF NOT EXISTS idx_orders_status_created ON orders(status, created_at);",
-        "CREATE INDEX IF NOT EXISTS idx_orders_code_tracking ON orders(order_code, tracking_number);",
-        "CREATE INDEX IF NOT EXISTS idx_order_items_order_id ON order_items(order_id);",
-        "CREATE INDEX IF NOT EXISTS idx_order_items_sku ON order_items(sku);",
-        "CREATE INDEX IF NOT EXISTS idx_order_items_order_sku ON order_items(order_id, sku);",
-        "CREATE INDEX IF NOT EXISTS idx_customers_total_spent ON customers(total_spent);",
-        "CREATE INDEX IF NOT EXISTS idx_customers_tier ON customers(tier);",
-        "CREATE INDEX IF NOT EXISTS idx_customers_created_at ON customers(created_at);",
-        "CREATE INDEX IF NOT EXISTS idx_returns_customer_email ON returns(customer_email);",
-        "CREATE INDEX IF NOT EXISTS idx_returns_created_at ON returns(created_at);",
-        "CREATE INDEX IF NOT EXISTS idx_returns_status_created ON returns(status, created_at);",
-    ]
-    with engine.begin() as conn:
-        for sql in raw_indexes:
-            try:
-                conn.exec_driver_sql(sql)
-            except Exception:
-                pass
+        raw_indexes = [
+            "CREATE INDEX IF NOT EXISTS idx_orders_created_at ON orders(created_at);",
+            "CREATE INDEX IF NOT EXISTS idx_orders_customer_created ON orders(customer_email, created_at);",
+            "CREATE INDEX IF NOT EXISTS idx_orders_status_created ON orders(status, created_at);",
+            "CREATE INDEX IF NOT EXISTS idx_orders_code_tracking ON orders(order_code, tracking_number);",
+            "CREATE INDEX IF NOT EXISTS idx_order_items_order_id ON order_items(order_id);",
+            "CREATE INDEX IF NOT EXISTS idx_order_items_sku ON order_items(sku);",
+            "CREATE INDEX IF NOT EXISTS idx_order_items_order_sku ON order_items(order_id, sku);",
+            "CREATE INDEX IF NOT EXISTS idx_customers_total_spent ON customers(total_spent);",
+            "CREATE INDEX IF NOT EXISTS idx_customers_tier ON customers(tier);",
+            "CREATE INDEX IF NOT EXISTS idx_customers_created_at ON customers(created_at);",
+            "CREATE INDEX IF NOT EXISTS idx_returns_customer_email ON returns(customer_email);",
+            "CREATE INDEX IF NOT EXISTS idx_returns_created_at ON returns(created_at);",
+            "CREATE INDEX IF NOT EXISTS idx_returns_status_created ON returns(status, created_at);",
+        ]
+        with engine.begin() as conn:
+            for sql in raw_indexes:
+                try:
+                    conn.exec_driver_sql(sql)
+                except Exception:
+                    pass
+    except Exception as err:
+        print(f"[Database Warning] Fallo en inicialización de esquema: {err}")
