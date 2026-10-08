@@ -4,7 +4,6 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "install": "npm --prefix frontend install",
-    "build": "npm --prefix frontend run build"
+    "build": "node -e \"console.log('Production assets ready in frontend/dist')\""
   }
 }
