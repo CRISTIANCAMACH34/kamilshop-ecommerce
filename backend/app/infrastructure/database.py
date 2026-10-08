@@ -33,10 +33,12 @@ else:
     DB_PATH = Path(__file__).resolve().parent.parent.parent / "kamilshop.db"
 SQLITE_URL = f"sqlite:///{DB_PATH}"
 
-# Normalizar URL de base de datos (Supabase a menudo utiliza el prefijo postgres://)
+# Normalizar URL de base de datos (Supabase / PostgreSQL con driver pg8000 100% pure-Python)
 raw_db_url = settings.DATABASE_URL or ""
 if raw_db_url.startswith("postgres://"):
-    raw_db_url = raw_db_url.replace("postgres://", "postgresql://", 1)
+    raw_db_url = raw_db_url.replace("postgres://", "postgresql+pg8000://", 1)
+elif raw_db_url.startswith("postgresql://") and "+pg8000" not in raw_db_url:
+    raw_db_url = raw_db_url.replace("postgresql://", "postgresql+pg8000://", 1)
 
 # Configuración del motor relacional con optimizaciones de conexión (SQLite local o Supabase PostgreSQL)
 try:
